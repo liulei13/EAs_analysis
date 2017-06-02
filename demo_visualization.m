@@ -1,7 +1,7 @@
 % analysize_outputFeature_of_different_layer
 %clear
 close all;
-rootDir='data_for_demo/CNN_1_2g_4a_1000times_withoutdiff/';
+rootDir='data_for_demo/CNN_1_2g_4a_10000times/';
 Algrithms={'CEP','DE','ES','GA'};
 Landscapes = {...
     'Sphere', 'Schwefel12', 'RotatedElliptic', 'Schwefel12withNoise', 'Schwefel2.6',... % Unimodal Function
@@ -15,9 +15,10 @@ Landscapes = {...
     };
 Landscapes2={  'Sphere', 'Schwefel','Elliptic','','','Rosenbrock','','Ackley','Rastrigin'};
 % load Trained CNN Model
+fprintf('Loding network...\n ');
 load('CNN_model/net_99.7306_25.mat');
 
-% load mapping vector 
+% load mapping vector
 load('V.mat');
 %load('PCA_V_1_101/V_10.mat');
 saveDir=['result_CNN_visual_PCA_V_1_101_net_data10' '/' 'visualization_result_2D/'];
@@ -30,8 +31,7 @@ for L=[1,2,3,6,8,9]
     if ~exist(saveDir)
         mkdir(saveDir);
     end
-    % saveDir='Feature_pca_V_D/';
-    fprintf('Loding network...\n ');
+    
     %file=ls(['net/*.mat']);       % obtain full directory of the file
     %load(['net/'  file(1:end)]);
     %load(file);
@@ -42,10 +42,10 @@ for L=[1,2,3,6,8,9]
     length_layers=length(net.Layers);
     for i=[length_layers-3]   %length_layers-4,
         outputFeatures = activations(net,xTest_cnn,i);     % extract output of the specify layer
-        %[Feature_PCA,V,D]=mypca(outputFeatures,2);     
+        %[Feature_PCA,V,D]=mypca(outputFeatures,2);
         %[Feature_PCA,V,D]=mypca_2(outputFeatures,2);
         Feature_PCA=outputFeatures*V;
-        % [COEFF, SCORE] = pca(outputFeatures,'NumComponents',4) ;      
+        % [COEFF, SCORE] = pca(outputFeatures,'NumComponents',4) ;
         index1=find(label==1);
         index2=find(label==2);
         index3=find(label==3);
@@ -60,7 +60,7 @@ for L=[1,2,3,6,8,9]
         %   plot(Feature_PCA(index5,1),Feature_PCA(index5,2),'.y');
         %   scatter3(DE(index2,1),DE(index2,2),DE(index2,3),'*g');
         legend1=legend('CEP','DE','ES','GA','Location','best');  %,'Location','northeast'
- 
+        
         set(legend1 ,'FontSize',28,'Interpreter','latex');           % ,'FontSize',24
         title(Landscapes{L},'Fontsize',36,'Interpreter','latex');
         xlabel('feature1','Fontsize',32,'Interpreter','latex');

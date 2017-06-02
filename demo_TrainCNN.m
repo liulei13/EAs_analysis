@@ -2,7 +2,7 @@
 % 'CEP','DE','ES','GA'
 clear
 clc
-rootDir='data_for_demo/CNN_1_2g_4a_1000times_withoutdiff/all_testFunction';
+rootDir='data_for_demo/CNN_1_2g_4a_10000times/all_testFunction';
 Algrithms={'CEP','DE','ES','GA'};
 length_algs=4;
 fig_num=0;      % count save number value of figure
