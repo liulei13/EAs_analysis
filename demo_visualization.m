@@ -62,7 +62,7 @@ for L=[1,2,3,6,8,9]
         legend1=legend('CEP','DE','ES','GA','Location','best');  %,'Location','northeast'
         
         set(legend1 ,'FontSize',28,'Interpreter','latex');           % ,'FontSize',24
-        title(Landscapes{L},'Fontsize',36,'Interpreter','latex');
+        title(Landscapes2{L},'Fontsize',36,'Interpreter','latex');
         xlabel('feature1','Fontsize',32,'Interpreter','latex');
         ylabel('feature2','Fontsize',32,'Interpreter','latex');
         %zlabel('feature3','Fontsize',20);
